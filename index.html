@@ -6,81 +6,63 @@
 <title>ספר ספקים ונוער לבון 2026</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
-  html,body{background:linear-gradient(135deg, #11998e 0%, #38ef7d 100%);min-height:100vh;}
+  html,body{background:#0F172A;min-height:100vh;}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
     direction:rtl;
-    color:#222;
+    color:#F8FAFC;
     display:flex;
     justify-content:center;
   }
-  .app{width:100%;max-width:560px;background:#F8F9FA;min-height:100vh;position:relative;box-shadow:0 0 25px rgba(0,0,0,0.15);}
+  .app{width:100%;max-width:560px;background:#1E293B;min-height:100vh;position:relative;box-shadow:0 0 30px rgba(0,0,0,0.5);}
 
   header{
     position:sticky;top:0;z-index:20;
-    background:linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);
-    padding:20px 18px 16px;
-    border-bottom:4px solid #FFE066;
-    box-shadow:0 4px 12px rgba(255,65,108,0.3);
+    background:linear-gradient(135deg, #3B82F6 0%, #8B5CF6 50%, #EC4899 100%);
+    padding:22px 18px 18px;
+    border-bottom:3px solid rgba(255,255,255,0.15);
+    box-shadow:0 10px 25px rgba(139,92,246,0.3);
   }
-  header h1{color:#FFFFFF;font-size:22px;font-weight:800;margin-bottom:3px;letter-spacing:-0.5px;}
-  header .sub{color:#FFE5EC;font-size:13px;margin-bottom:14px;font-weight:500;}
+  header h1{color:#FFFFFF;font-size:23px;font-weight:900;margin-bottom:4px;letter-spacing:-0.5px;}
+  header .sub{color:rgba(255,255,255,0.85);font-size:13px;margin-bottom:14px;font-weight:500;}
   .search-wrap{position:relative;}
-  .search-wrap svg{position:absolute;top:50%;right:16px;transform:translateY(-50%);width:18px;height:18px;stroke:#FF4B2B;}
+  .search-wrap svg{position:absolute;top:50%;right:16px;transform:translateY(-50%);width:18px;height:18px;stroke:#8B5CF6;}
   #search{
-    width:100%;height:46px;border-radius:23px;border:none;
-    background:#FFFFFF;color:#333;font-size:15px;font-weight:500;
+    width:100%;height:48px;border-radius:24px;border:none;
+    background:#0F172A;color:#F8FAFC;font-size:15px;font-weight:500;
     padding:0 48px 0 16px;outline:none;
-    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    box-shadow:inset 0 2px 4px rgba(0,0,0,0.3);
   }
-  #search::placeholder{color:#A0A0A0;}
-  #search:focus{box-shadow:0 0 0 3px rgba(255,224,102,0.6);}
-
-  .quickdial{
-    display:flex;gap:10px;overflow-x:auto;padding:16px 18px;
-    scrollbar-width:none; background:#FFF9E6; border-bottom:1px solid #FFE066;
-  }
-  .quickdial::-webkit-scrollbar{display:none;}
-  .qd-btn{
-    flex:0 0 auto;width:78px;text-align:center;text-decoration:none;color:inherit;
-  }
-  .qd-circle{
-    width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);
-    display:flex;align-items:center;justify-content:center;margin:0 auto 6px;
-    box-shadow:0 4px 10px rgba(255,75,43,0.3);
-    transition:transform 0.2s ease;
-  }
-  .qd-circle:hover{transform:scale(1.05);}
-  .qd-circle svg{width:24px;height:24px;stroke:white;}
-  .qd-name{font-size:11.5px;color:#444;font-weight:700;}
-  .qd-num{font-size:13.5px;color:#FF4B2B;font-weight:800;}
+  #search::placeholder{color:#64748B;}
+  #search:focus{box-shadow:inset 0 2px 4px rgba(0,0,0,0.3), 0 0 0 2px #EC4899;}
 
   .section-divider {
-    padding: 16px 18px 6px;
-    font-size: 17px;
+    padding: 20px 18px 8px;
+    font-size: 16px;
     font-weight: 800;
-    color: #2D3748;
+    color: #94A3B8;
     display: flex;
     align-items: center;
     gap: 8px;
+    letter-spacing: 0.5px;
   }
 
-  .categories{padding:10px 14px 35px;display:flex;flex-direction:column;gap:14px;}
+  .categories{padding:10px 14px 40px;display:flex;flex-direction:column;gap:14px;}
 
-  .cat{border-radius:18px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.04);background:#FFFFFF;border:1px solid rgba(0,0,0,0.04);}
+  .cat{border-radius:18px;overflow:hidden;background:#27354A;border:1px solid rgba(255,255,255,0.06);box-shadow:0 4px 15px rgba(0,0,0,0.2);}
   .cat-head{
-    display:flex;align-items:center;gap:12px;padding:15px 18px;
+    display:flex;align-items:center;gap:12px;padding:16px 18px;
     cursor:pointer;user-select:none;background:none;border:none;width:100%;
     text-align:right;font-family:inherit;
   }
   .cat-icon{
-    width:40px;height:40px;border-radius:12px;display:flex;align-items:center;
-    justify-content:center;flex:0 0 auto;box-shadow:0 3px 8px rgba(0,0,0,0.1);
+    width:42px;height:42px;border-radius:14px;display:flex;align-items:center;
+    justify-content:center;flex:0 0 auto;box-shadow:0 4px 10px rgba(0,0,0,0.3);
   }
-  .cat-icon svg{width:20px;height:20px;stroke:white;}
-  .cat-title{flex:1;font-size:16px;font-weight:800;color:#1A202C;}
-  .cat-count{font-size:12px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(0,0,0,0.06);color:#4A5568;}
-  .chev{width:18px;height:18px;transition:transform .25s ease;flex:0 0 auto;color:#A0AEC0;}
+  .cat-icon svg{width:21px;height:21px;stroke:white;}
+  .cat-title{flex:1;font-size:16px;font-weight:800;color:#F1F5F9;}
+  .cat-count{font-size:12px;font-weight:700;padding:3px 9px;border-radius:12px;background:rgba(255,255,255,0.08);color:#CBD5E1;}
+  .chev{width:18px;height:18px;transition:transform .25s ease;flex:0 0 auto;color:#94A3B8;}
   .cat.open .chev{transform:rotate(180deg);}
 
   .cat-body{max-height:0;overflow:hidden;transition:max-height .35s ease;}
@@ -89,46 +71,47 @@
 
   .row{
     display:flex;flex-direction:column;gap:8px;
-    padding:12px 14px;border-radius:12px;background:#F7FAFC;border:1px solid #E2E8F0;
+    padding:14px;border-radius:14px;background:#1E293B;border:1px solid rgba(255,255,255,0.04);
+    transition:transform 0.15s ease, border-color 0.15s ease;
+  }
+  .row:hover{border-color:rgba(139,92,246,0.4);transform:translateY(-1px);}
+  .row-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+  .row-name{font-size:15px;font-weight:800;color:#F8FAFC;}
+  .row-desc{font-size:13px;color:#94A3B8;font-weight:500;}
+  .row-addr{font-size:12px;color:#64748B;display:flex;align-items:center;gap:4px;margin-top:2px;}
+  
+  .row-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;}
+  .action-pill{
+    display:flex;align-items:center;gap:6px;text-decoration:none;
+    background:#0F172A;border-radius:20px;padding:6px 12px;
+    font-size:12.5px;font-weight:700;white-space:nowrap;
+    border:1px solid rgba(255,255,255,0.08);
     transition:all 0.2s ease;
   }
-  .row:hover{background:#EDF2F7;border-color:CBD5E0;}
-  .row-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
-  .row-name{font-size:15px;font-weight:800;color:#2D3748;}
-  .row-desc{font-size:13px;color:#4A5568;font-weight:500;}
-  .row-addr{font-size:12px;color:#718096;display:flex;align-items:center;gap:4px;margin-top:2px;}
-  
-  .row-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px;}
-  .action-pill{
-    display:flex;align-items:center;gap:5px;text-decoration:none;
-    background:#FFFFFF;border-radius:20px;padding:6px 12px;
-    font-size:12.5px;font-weight:700;white-space:nowrap;color:#2B6CB0;
-    box-shadow:0 2px 5px rgba(0,0,0,0.05);border:1px solid #E2E8F0;
-    transition:transform 0.1s ease;
-  }
-  .action-pill:active{transform:scale(0.96);}
+  .action-pill:active{transform:scale(0.95);}
   .action-pill svg{width:13px;height:13px;}
-  .tel-pill{color:#2F855A;background:#F0FFF4;border-color:#C6F6D5;}
-  .mail-pill{color:#B7791F;background:#FFFAF0;border-color:#FEEBC8;}
-  .web-pill{color:#6B46C1;background:#FAF5FF;border-color:#E9D8FD;}
+  
+  .tel-pill{color:#34D399;border-color:rgba(52,211,153,0.3);background:rgba(52,211,153,0.05);}
+  .mail-pill{color:#FBBF24;border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.05);}
+  .web-pill{color:#A78BFA;border-color:rgba(167,139,250,0.3);background:rgba(167,139,250,0.05);}
 
   .hidden{display:none !important;}
-  .empty-msg{text-align:center;color:#718096;font-size:14px;padding:40px 20px;font-weight:600;}
+  .empty-msg{text-align:center;color:#64748B;font-size:14px;padding:40px 20px;font-weight:600;}
 
-  .c1 .cat-icon{background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%);}
-  .c2 .cat-icon{background:linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);}
-  .c3 .cat-icon{background:linear-gradient(135deg, #fa709a 0%, #fee140 100%);}
-  .c4 .cat-icon{background:linear-gradient(135deg, #30cfd0 0%, #330867 100%);}
-  .c5 .cat-icon{background:linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%); color:#222;}
+  .c1 .cat-icon{background:linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);}
+  .c2 .cat-icon{background:linear-gradient(135deg, #10B981 0%, #047857 100%);}
+  .c3 .cat-icon{background:linear-gradient(135deg, #EC4899 0%, #BE185D 100%);}
+  .c4 .cat-icon{background:linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);}
+  .c5 .cat-icon{background:linear-gradient(135deg, #F59E0B 0%, #B45309 100%);}
 
-  footer{text-align:center;padding:20px;font-size:12px;color:#718096;font-weight:600;}
+  footer{text-align:center;padding:20px;font-size:12px;color:#64748B;font-weight:600;}
 </style>
 </head>
 <body>
 <div class="app">
 
   <header>
-    <h1>ספר ספקים • ועדת נוער לבון 🔥</h1>
+    <h1>ספר ספקים • ועדת נוער לבון ⚡</h1>
     <div class="sub">חפשו ספק, שירות, כתובת או טלפון לחיוג מהיר</div>
     <div class="search-wrap">
       <input id="search" type="text" placeholder="חיפוש חופשי ברשימה..." autocomplete="off">
@@ -136,9 +119,7 @@
     </div>
   </header>
 
-  <div class="quickdial" id="quickdial"></div>
-
-  <div class="section-divider">⚡ רשימת ספקים ונותני שירות מעודכנת</div>
+  <div class="section-divider">📂 קטגוריות ספקים ונותני שירות</div>
   <div class="categories" id="categoriesSuppliers"></div>
 
   <div class="empty-msg hidden" id="emptyMsg">אין תוצאות תואמות לחיפוש 😅</div>
@@ -159,13 +140,6 @@ const ICONS = {
 };
 
 function ic(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'+ICONS[name]+'</svg>';}
-
-const QUICKDIAL = [
-  {name:'משטרה', num:'100'},
-  {name:'מד"א', num:'101'},
-  {name:'כיבוי אש', num:'102'},
-  {name:'מוקד משגב', num:'107'},
-];
 
 const SUPPLIERS_DATA = [
  {
@@ -216,14 +190,6 @@ const SUPPLIERS_DATA = [
 ];
 
 function toTel(n){ return n.replace(/[^0-9+]/g,''); }
-
-const qdEl = document.getElementById('quickdial');
-qdEl.innerHTML = QUICKDIAL.map(q => `
-  <a class="qd-btn" href="tel:${toTel(q.num)}">
-    <div class="qd-circle">${ic('phone')}</div>
-    <div class="qd-name">${q.name}</div>
-    <div class="qd-num">${q.num}</div>
-  </a>`).join('');
 
 const supEl = document.getElementById('categoriesSuppliers');
 supEl.innerHTML = SUPPLIERS_DATA.map((cat, idx) => `
@@ -284,10 +250,6 @@ searchEl.addEventListener('input', () => {
     if(catHasMatch) anyVisible = true;
   });
   emptyMsgEl.classList.toggle('hidden', anyVisible);
-});
-</script>
-</body>
-</html>
 });
 </script>
 </body>

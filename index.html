@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>ספר ספקים ומוקד לבון 2026</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:#EDE8DC;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    direction:rtl;
+    color:#242220;
+    display:flex;
+    justify-content:center;
+  }
+  .app{width:100%;max-width:560px;background:#FAF7F0;min-height:100vh;position:relative;}
+
+  header{
+    position:sticky;top:0;z-index:20;
+    background:#1F3B36;
+    padding:16px 18px 14px;
+    border-bottom:4px solid #D9B45C;
+  }
+  header h1{color:#FAF7F0;font-size:21px;font-weight:700;margin-bottom:2px;}
+  header .sub{color:#B9CFC7;font-size:12.5px;margin-bottom:12px;}
+  .search-wrap{position:relative;}
+  .search-wrap svg{position:absolute;top:50%;right:14px;transform:translateY(-50%);width:18px;height:18px;stroke:#7C9490;}
+  #search{
+    width:100%;height:44px;border-radius:22px;border:none;
+    background:#2A4A43;color:#FAF7F0;font-size:15px;
+    padding:0 44px 0 16px;outline:none;
+  }
+  #search::placeholder{color:#7C9490;}
+  #search:focus{box-shadow:0 0 0 2px #D9B45C;}
+
+  .quickdial{
+    display:flex;gap:10px;overflow-x:auto;padding:16px 18px;
+    scrollbar-width:none;
+  }
+  .quickdial::-webkit-scrollbar{display:none;}
+  .qd-btn{
+    flex:0 0 auto;width:78px;text-align:center;text-decoration:none;color:inherit;
+  }
+  .qd-circle{
+    width:60px;height:60px;border-radius:50%;background:#C23616;
+    display:flex;align-items:center;justify-content:center;margin:0 auto 6px;
+    box-shadow:0 0 0 0 rgba(194,54,22,0.5);
+    animation:pulse 2.6s infinite;
+  }
+  .qd-circle svg{width:26px;height:26px;stroke:white;}
+  .qd-name{font-size:11.5px;color:#5A5650;font-weight:700;}
+  .qd-num{font-size:14px;color:#1F3B36;font-weight:700;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(194,54,22,0.45);}
+    70%{box-shadow:0 0 0 10px rgba(194,54,22,0);}
+    100%{box-shadow:0 0 0 0 rgba(194,54,22,0);}
+  }
+
+  .section-divider {
+    padding: 16px 18px 4px;
+    font-size: 17px;
+    font-weight: 800;
+    color: #1F3B36;
+    border-bottom: 2px solid #D9B45C;
+    margin: 10px 14px 0;
+  }
+
+  .categories{padding:10px 14px 30px;display:flex;flex-direction:column;gap:12px;}
+
+  .cat{border-radius:16px;overflow:hidden;}
+  .cat-head{
+    display:flex;align-items:center;gap:12px;padding:14px 16px;
+    cursor:pointer;user-select:none;background:none;border:none;width:100%;
+    text-align:right;font-family:inherit;
+  }
+  .cat-icon{
+    width:38px;height:38px;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;flex:0 0 auto;
+  }
+  .cat-icon svg{width:19px;height:19px;stroke:white;}
+  .cat-title{flex:1;font-size:16px;font-weight:700;}
+  .cat-count{font-size:12px;font-weight:700;opacity:0.75;}
+  .chev{width:16px;height:16px;transition:transform .25s ease;flex:0 0 auto;}
+  .cat.open .chev{transform:rotate(180deg);}
+
+  .cat-body{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .cat.open .cat-body{max-height:1600px;}
+  .cat-list{padding:2px 16px 14px;display:flex;flex-direction:column;}
+
+  .row{
+    display:flex;flex-direction:column;gap:6px;
+    padding:12px 4px;border-top:1px solid rgba(0,0,0,0.06);
+  }
+  .row:first-child{border-top:none;}
+  .row-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+  .row-name{font-size:15px;font-weight:700;color:#1F3B36;}
+  .row-desc{font-size:12.5px;color:#5A5650;}
+  .row-addr{font-size:12px;color:#7A776E;}
+  
+  .row-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;}
+  .action-pill{
+    display:flex;align-items:center;gap:5px;text-decoration:none;
+    background:rgba(255,255,255,0.75);border-radius:20px;padding:5px 10px;
+    font-size:12.5px;font-weight:700;white-space:nowrap;color:#1F3B36;
+  }
+  .action-pill svg{width:13px;height:13px;}
+  .web-pill{background:#E2ECE9;color:#0F4F45;}
+
+  .hidden{display:none !important;}
+  .empty-msg{text-align:center;color:#9A968C;font-size:14px;padding:40px 20px;}
+
+  .c1 .cat-head{background:#F2ECD8;} .c1 .cat-icon{background:#8A6D3B;} .c1 .cat-title,.c1 .cat-count,.c1 .chev{color:#6B4F1D;stroke:#6B4F1D;}
+  .c2 .cat-head{background:#DFEEEA;} .c2 .cat-icon{background:#147363;} .c2 .cat-title,.c2 .cat-count,.c2 .chev{color:#0F4F45;stroke:#0F4F45;}
+  .c3 .cat-head{background:#EEE3F3;} .c3 .cat-icon{background:#6A4C93;} .c3 .cat-title,.c3 .cat-count,.c3 .chev{color:#4A2E66;stroke:#4A2E66;}
+  .c4 .cat-head{background:#E4ECDD;} .c4 .cat-icon{background:#4B6043;} .c4 .cat-title,.c4 .cat-count,.c4 .chev{color:#33462B;stroke:#33462B;}
+  .c5 .cat-head{background:#FBF0D9;} .c5 .cat-icon{background:#B8860B;} .c5 .cat-title,.c5 .cat-count,.c5 .chev{color:#7A5A06;stroke:#7A5A06;}
+
+  footer{text-align:center;padding:18px;font-size:11.5px;color:#9A968C;}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header>
+    <h1>ספר ספקים ומוהל לבון 2026</h1>
+    <div class="sub">חפשו ספק, תחום פעילות, כתובת או טלפון</div>
+    <div class="search-wrap">
+      <input id="search" type="text" placeholder="חיפוש חופשי..." autocomplete="off">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
+    </div>
+  </header>
+
+  <div class="quickdial" id="quickdial"></div>
+
+  <div class="section-divider">🛠️ ספר ספקים יישובי מעודכן</div>
+  <div class="categories" id="categoriesSuppliers"></div>
+
+  <div class="empty-msg hidden" id="emptyMsg">לא נמצאו תוצאות</div>
+
+  <footer>מזכירות לבון • מתעדכן אוטומטית</footer>
+</div>
+
+<script>
+const ICONS = {
+  phone: '<path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3.9 3 3.4 3.4 3 4 3h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1.1L6.6 10.8z" stroke-linejoin="round" fill="none"/>',
+  mail: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/>',
+  web: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+  wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  cart: '<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>',
+  smile: '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
+  book: '<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/><path d="M6 6h12M6 10h12"/>',
+  tag: '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>'
+};
+
+function ic(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">'+ICONS[name]+'</svg>';}
+
+const QUICKDIAL = [
+  {name:'משטרה', num:'100'},
+  {name:'מד"א', num:'101'},
+  {name:'כיבוי אש', num:'102'},
+  {name:'חב\' חשמל', num:'103'},
+];
+
+const SUPPLIERS_DATA = [
+ {
+   id: 's1', title: 'ציוד אחזקה, חומרי בניין וכלי עבודה', icon: 'wrench', items: [
+     {name:'Cohen Center Technical Equipment Ltd.', desc:'ציוד טכני, כלי עבודה וחומרי בניין', addr:'המלאכה 18, כרמיאל', phones:['04-988-8318','054-669-6038'], email:'noacohen259@gmail.com', web:'https://cohencenter.co.il'},
+     {name:'מ.ג הצפון בע"מ', desc:'אספקה טכנית, כלי עבודה וציוד אחזקה', addr:'החרושת 17, כרמיאל', phones:['04-998-6461'], email:'Mghazafon@gmail.com', web:'https://www.mgtools.co.il'},
+     {name:'אסניר חומרי בניין', desc:'חומרי בניין, צבע, גינון וציוד אחזקה', addr:'התעשייה 9, כרמיאל', phones:['04-958-6777'], email:'info@inkarmiel.co.il'},
+     {name:'פהד סנטר', desc:'ציוד טכני ואחזקה', addr:'מג\'ד אל-כרום', phones:[], email:''},
+     {name:'פ.ס עולם הברזל בע"מ', desc:'ברזל ומסגרות', addr:'כרמיאל', phones:[], email:''}
+   ]
+ },
+ {
+   id: 's2', title: 'מזון ורכש שוטף', icon: 'cart', items: [
+     {name:'אברהם שיווק כרמיאל', desc:'רכש מזון ומצרכים', addr:'האופן 1, כרמיאל', phones:['04-998-5111','04-998-4111'], email:'9984111@gmail.com', web:''},
+     {name:'ש.ש. סוכנויות שיווק והפצה', desc:'אספקת מזון ומוצרים שוטפים', addr:'המעפילים 1, קרית אתא', phones:['050-5375501'], email:'', web:''},
+     {name:'ואמא מרקט', desc:'מזון ומכולת', addr:'מג\'ד אל-כרום', phones:[], email:''},
+     {name:'הטחנות הגדולות של א"י', desc:'מוצרי מזון וחומרי גלם', addr:'חטיבת גולני 40, חיפה', phones:['073-7826093'], email:'orders@hagdolot.co.il', web:'https://hagdolot.co.il'},
+     {name:'טבע בייק', desc:'מאפים ומוצרי אפייה', addr:'גליל / רשת', phones:['052-5708084'], email:'bennyfire@gmail.com', web:'https://www.tevabike.com'}
+   ]
+ },
+ {
+   id: 's3', title: 'תרבות, אטרקציות ופעילויות לילדים ונוער', icon: 'smile', items: [
+     {name:'דודו הקוסם', desc:'מופעי ילדים', addr:'ארצי / אזורי', phones:[], email:''},
+     {name:'קרקס יוסי', desc:'מופעי קרקס', addr:'ארצי / אזורי', phones:[], email:''},
+     {name:'תיאטרון השעה הישראלי', desc:'הצגות ילדים ונוער', addr:'מרכזי', phones:[], email:''},
+     {name:'טל בונדה – פיגוז הפעלות', desc:'הפעלות קהילתיות', addr:'אזורי', phones:[], email:''},
+     {name:'חגיגה של בלונים', desc:'אירועים ופעילויות לילדים', addr:'אזורי', phones:[], email:''}
+   ]
+ },
+ {
+   id: 's4', title: 'ציוד לימודי, גנים וציוד משרדי', icon: 'book', items: [
+     {name:'מקס סטוק', desc:'ציוד משרדי, יצירה וציוד לגנים', addr:'כרמיאל והסביבה', phones:[], email:''},
+     {name:'קופיטק מכון משרדי בע"מ', desc:'ציוד משרדי והדפסה', addr:'איזור התעשייה', phones:[], email:''},
+     {name:'פתרונות הדפסה חכמים בע"מ', desc:'מדפסות וציוד הדפסה', addr:'אזורי', phones:[], email:''},
+     {name:'יעד לב מחשבים', desc:'מחשוב וציוד לימודי', addr:'אזורי', phones:[], email:''},
+     {name:'באלי גן / גן-לי נהריה שיווק', desc:'ציוד לגני ילדים', addr:'נהריה / צפון', phones:[], email:''}
+   ]
+ },
+ {
+   id: 's5', title: 'שילוט, דפוס, מיתוג וטקסטיל', icon: 'tag', items: [
+     {name:'אליעד מיתוגים בע"מ', desc:'מיתוג, שילוט ומוצרי פרסום', addr:'אזורי', phones:[], email:''},
+     {name:'שי שיווק מתנות ומוצרי פרסום', desc:'מוצרי קד"מ ומתנות', addr:'אזורי', phones:[], email:''},
+     {name:'שי תעשיות שלטים', desc:'שילוט', addr:'אזורי', phones:[], email:''},
+     {name:'סט כרמיאל בע"מ', desc:'הדפסות ומיתוג', addr:'כרמיאל', phones:[], email:''},
+     {name:'ישראגרף', desc:'דפוס והפקות דפוס', addr:'אזורי', phones:[], email:''}
+   ]
+ }
+];
+
+function toTel(n){ return n.replace(/[^0-9+]/g,''); }
+
+const qdEl = document.getElementById('quickdial');
+qdEl.innerHTML = QUICKDIAL.map(q => `
+  <a class="qd-btn" href="tel:${toTel(q.num)}">
+    <div class="qd-circle">${ic('phone')}</div>
+    <div class="qd-name">${q.name}</div>
+    <div class="qd-num">${q.num}</div>
+  </a>`).join('');
+
+const supEl = document.getElementById('categoriesSuppliers');
+supEl.innerHTML = SUPPLIERS_DATA.map((cat, idx) => `
+  <div class="cat c${(idx%5)+1} ${cat.id} ${idx===0?'open':''}" data-id="${cat.id}">
+    <button class="cat-head" data-toggle="${cat.id}">
+      <div class="cat-icon">${ic(cat.icon)}</div>
+      <div class="cat-title">${cat.title}</div>
+      <div class="cat-count">${cat.items.length}</div>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="cat-body">
+      <div class="cat-list">
+        ${cat.items.map(item => `
+          <div class="row" data-name="${item.name}" data-desc="${item.desc}" data-addr="${item.addr}" data-phones="${item.phones.join(' ')}">
+            <div class="row-top">
+              <div class="row-info">
+                <div class="row-name">${item.name}</div>
+                <div class="row-desc">${item.desc}</div>${item.addr ? `<div class="row-addr">📍 ${item.addr}</div>` : ''}
+              </div>
+            </div>
+            <div class="row-actions">
+              ${item.phones.map(p => `<a class="action-pill" href="tel:${toTel(p)}">${ic('phone')} ${p}</a>`).join('')}
+              ${item.email ? `<a class="action-pill" href="mailto:${item.email}">${ic('mail')} אימייל</a>` : ''}
+              ${item.web ? `<a class="action-pill web-pill" href="${item.web}" target="_blank" rel="noopener">${ic('web')} לאתר</a>` : ''}
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+  </div>`).join('');
+
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-toggle]');
+  if(!btn) return;
+  const cat = btn.closest('.cat');
+  cat.classList.toggle('open');
+});
+
+const searchEl = document.getElementById('search');
+const emptyMsgEl = document.getElementById('emptyMsg');
+searchEl.addEventListener('input', () => {
+  const q = searchEl.value.trim().toLowerCase();
+  let anyVisible = false;
+  document.querySelectorAll('.cat').forEach(catEl => {
+    let catHasMatch = false;
+    const rows = catEl.querySelectorAll('.row');
+    rows.forEach(row => {
+      const hay = (row.dataset.name + ' ' + row.dataset.desc + ' ' + row.dataset.addr + ' ' + row.dataset.phones + ' ' + catEl.querySelector('.cat-title').textContent).toLowerCase();
+      const match = q === '' || hay.includes(q);
+      row.classList.toggle('hidden', !match);
+      if(match) catHasMatch = true;
+    });
+    catEl.classList.toggle('hidden', !catHasMatch);
+    if(q !== ''){
+      catEl.classList.toggle('open', catHasMatch);
+    } else {
+      catEl.classList.toggle('open', catEl.dataset.id === 's1');
+    }
+    if(catHasMatch) anyVisible = true;
+  });
+  emptyMsgEl.classList.toggle('hidden', anyVisible);
+});
+</script>
+</body>
+</html>
